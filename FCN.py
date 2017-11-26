@@ -9,7 +9,7 @@ import BatchDatsetReader as dataset
 from six.moves import xrange
 
 FLAGS = tf.flags.FLAGS
-tf.flags.DEFINE_integer("batch_size", "8", "batch size for training")
+tf.flags.DEFINE_integer("batch_size", "32", "batch size for training")
 tf.flags.DEFINE_string("logs_dir", "logs/", "path to logs directory")
 tf.flags.DEFINE_string("data_dir", "Data_zoo/MIT_SceneParsing/", "path to dataset")
 tf.flags.DEFINE_float("learning_rate", "1e-4", "Learning rate for Adam Optimizer")
@@ -203,7 +203,7 @@ def main(argv=None):
                 valid_loss = sess.run(loss, feed_dict={image: valid_images, annotation: valid_annotations,
                                                        keep_probability: 1.0})
                 print("%s ---> Validation_loss: %g" % (datetime.datetime.now(), valid_loss))
-                saver.save(sess, FLAGS.logs_dir + "model.ckpt", itr)
+                saver.save(sess, FLAGS.logs_dir + "model.ckpt")
 
     elif FLAGS.mode == "visualize":
         valid_images, valid_annotations = validation_dataset_reader.get_random_batch(FLAGS.batch_size)
